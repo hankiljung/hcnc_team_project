@@ -10,5 +10,5 @@ import egovframework.rte.psl.dataaccess.mapper.Mapper;
 public interface AdminMapper {
 
 	public List<Map<String, Object>> selectGradeListByAdmin();
-
+	
 }
