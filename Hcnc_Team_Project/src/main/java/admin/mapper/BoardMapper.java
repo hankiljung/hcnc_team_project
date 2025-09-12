@@ -11,6 +11,10 @@ public interface BoardMapper {
 
 	public List<Map<String, Object>> selectBoardCodeByAdmin();
 	
-	public List<Map<String, Object>> selectBoardByAdmin();
+	public List<Map<String, Object>> selectBoardByAdmin(String sortNumber);
+
+	public List<Map<String, Object>> selectBoardByAdmin(Map<String, Object> params);
+	
+	public Map<String, Object> selectBoardDetailByAdmin(Map<String, Object> params);
 
 }

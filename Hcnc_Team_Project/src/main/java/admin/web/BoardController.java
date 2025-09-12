@@ -30,28 +30,30 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@RequestMapping(value="/selectBoardCodeByAdmin.do")
-	public NexacroResult selectBoardCodeByAdmin(
-	/*
-	 * @ParamDataSet(name="ds_data", required = false) Map<String, Object> ds_data
-	 */
-			) {
+	public NexacroResult selectBoardCodeByAdmin() {
 		NexacroResult result = new NexacroResult();
 		List<Map<String, Object>> selectBoardCodeByAdmin = boardService.selectBoardCodeByAdmin();
-		result.addDataSet("ds_radio", selectBoardCodeByAdmin);
+		result.addDataSet("ds_combo", selectBoardCodeByAdmin);
 		return result;
 	}
 	
 	@RequestMapping(value="/selectBoardByAdmin.do")
-	public NexacroResult selectBoardByAdmin(
-	/*
-	 * @ParamDataSet(name="ds_data", required = false) Map<String, Object> ds_data
-	 */
-			) {
+	public NexacroResult selectBoardByAdmin(@ParamDataSet(name = "ds_search", required = false)Map<String, Object> sortNumber) {
 		NexacroResult result = new NexacroResult();
-		List<Map<String, Object>> selectBoardByAdmin = boardService.selectBoardByAdmin();
+		
+		System.out.println("강해란 바보" + sortNumber);
+		List<Map<String, Object>> selectBoardByAdmin = boardService.selectBoardByAdmin(sortNumber);
 		result.addDataSet("ds_list", selectBoardByAdmin);
 		return result;
 	}
+	@RequestMapping(value="/selectBoardDetailByAdmin.do")
+	public NexacroResult selectBoardDetailByAdmin(@ParamDataSet(name = "ds_search", required = false)Map<String, Object> params) {
+		NexacroResult result = new NexacroResult();
+		Map<String, Object> selectBoardDetailByAdmin = boardService.selectBoardDetailByAdmin(params);
+		result.addDataSet("ds_detail", selectBoardDetailByAdmin);
+		return result;
+	}
+	
 	
 	
 	

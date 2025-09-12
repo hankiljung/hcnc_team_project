@@ -2,26 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="admin.mapper.BoardMapper">
 	<select id="selectBoardCodeByAdmin" resultType="java.util.Map">
-	SELECT 
-		 BOARD_CODE
-		,BOARD_NAME
-	FROM BOARDS;
+	  SELECT '' as BOARD_ID
+            ,'전체' as BOARD_NAME
+		FROM DUAL
+	   UNION
+	  SELECT 
+		     BOARD_ID
+		   , BOARD_NAME
+	    FROM BOARDS
+ 	   WHERE BOARD_ID IN('1','2')
 	</select>
+
 	
 	<!-- 공지사항만 조회 -->
-	<select id="selectBoardByAdmin" resultType="java.util.Map">
-	SELECT 
-		  P.SORT_NUMBER
-		 ,B.BOARD_NAME
-		 ,P.POST_TITLE
-		 ,P.MEMBER_ID
-		 ,P.INPUT_DT
-	 FROM
-	  	  POSTS P
-  	  INNER JOIN
-  	  	BOARDS B ON P.BOARD_ID = B.BOARD_ID
-  	  WHERE 
-		B.BOARD_ID = 1;	
-	</select>
-	
+    <select id="selectBoardByAdmin" resultType="java.util.Map">
+	SELECT
+		  B.POST_ID
+		 ,B.SORT_NUMBER
+	     , A.BOARD_NAME 
+	     , B.POST_TITLE 
+	     , B.MEMBER_ID 
+	     , B.INPUT_DT 
+	  FROM BOARDS A 
+	 INNER JOIN POSTS B ON A.BOARD_ID = B.BOARD_ID 
+	 WHERE A.BOARD_ID = 1;
+</select>
+
+
+
+
+<select id="selectBoardDetailByAdmin" resultType="java.util.Map" parameterType="map">
+  SELECT 
+  	  B.POST_ID,
+      B.MEMBER_ID,
+      B.POST_TITLE,
+      B.POST_CONTENT,
+      B.INPUT_DT,
+      A.BOARD_NAME
+  FROM BOARDS A
+  INNER JOIN POSTS B ON A.BOARD_ID = B.BOARD_ID
+  WHERE B.POST_ID = #{POST_ID}
+</select>
+
+
+
 </mapper>

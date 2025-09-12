@@ -22,8 +22,13 @@ public class BoardService {
     	return boardMapper.selectBoardCodeByAdmin();
 	};
 	
-	public List<Map<String, Object>> selectBoardByAdmin(){
-    	return boardMapper.selectBoardByAdmin();
+	public List<Map<String, Object>> selectBoardByAdmin(Map<String, Object> params){
+    	return boardMapper.selectBoardByAdmin(params);
 	};
+	
+	public Map<String, Object> selectBoardDetailByAdmin(Map<String, Object> params){
+    	return boardMapper.selectBoardDetailByAdmin(params);
+	};
+	
 	
 }
